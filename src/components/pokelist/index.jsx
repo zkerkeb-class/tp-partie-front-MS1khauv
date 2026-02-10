@@ -1,38 +1,26 @@
-import { useState, useEffect } from "react";
-import PokeCard from "../pokeCard";
+import React from 'react';
+import PokeCard from '../pokeCard';
 
-const PokeList = () => {
-    const [pokemons, setPokemons] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        fetch("https://pokeapi.co/api/v2/pokemon?limit=20")
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Données reçues:", data);
-                setPokemons(data.results);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Erreur:", error);
-                setLoading(false);
-            });
-    }, []);
-
-    if (loading) {
-        return <p>Chargement...</p>
-    }
-
+export default function PokeList({ pokemons, loading, error }) {
+  if (loading) {
     return (
-        <div>
-            <h2>Liste des Pokémon</h2>
-            <ul>
-                {pokemons.map((pokemon, index) => (
-                    <PokeCard key={index} pokemon={pokemon} />
-                ))}
-            </ul>
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-8 max-w-[1400px] mx-auto">
+        {[...Array(10)].map((_, i) => (
+          <div key={i} className="h-80 bg-gray-800 animate-pulse rounded-[2.5rem]"></div>
+        ))}
+      </div>
     );
-};
+  }
 
-export default PokeList;
+  if (error) return <p className="text-red-500 font-bold text-center">{error}</p>;
+
+  return (
+    <div className="max-w-[1400px] mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-8 justify-items-center">
+        {pokemons.map((pokemon) => (
+          <PokeCard key={`${pokemon.id}-${pokemon.name}`} pokemon={pokemon} />
+        ))}
+      </div>
+    </div>
+  );
+}
