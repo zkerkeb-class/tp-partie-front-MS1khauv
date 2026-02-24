@@ -182,11 +182,10 @@ tp-partie-front-MS1khauv/
 > localStorage.removeItem('pokedex-hasSeenIntro')
 > ```
 
-### 🥚 Easter Eggs
+### 🥚 Easter Egg
 
 | Easter Egg | Déclencheur | Effet |
 |-----------|------------|-------|
-| **Mew apparaît** | Cliquer **5 fois** sur une carte Pikachu | Modal animée avec l'artwork officiel de Mew, sparkles et message secret. Un indicateur ⚡ 2/5 s'affiche en bas à droite. |
 | **Thème Pokémon** | Rester **30 secondes** sur la page d'accueil | Toast vert slide-up + lecture du thème **Pokémon Rouge/Bleu** (Title Screen) |
 
 ### 🛠️ Pokémon personnalisés
