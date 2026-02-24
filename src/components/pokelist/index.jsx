@@ -2,25 +2,51 @@ import React from 'react';
 import PokeCard from '../pokeCard';
 
 export default function PokeList({ pokemons, loading, error }) {
+  const gridStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    gap: '24px',
+  };
+
   if (loading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-8 max-w-[1400px] mx-auto">
+      <div style={gridStyle}>
         {[...Array(10)].map((_, i) => (
-          <div key={i} className="h-80 bg-gray-800 animate-pulse rounded-[2.5rem]"></div>
+          <div
+            key={i}
+            style={{
+              aspectRatio: '2/3',
+              background: 'rgba(255,255,255,0.04)',
+              borderRadius: '20px',
+              border: '1px solid rgba(255,255,255,0.06)',
+              animation: 'pulse 1.5s infinite',
+            }}
+          />
         ))}
       </div>
     );
   }
 
-  if (error) return <p className="text-red-500 font-bold text-center">{error}</p>;
+  if (error) return (
+    <p style={{ color: '#ef4444', fontWeight: 700, textAlign: 'center', padding: '40px' }}>
+      {error}
+    </p>
+  );
+
+  if (pokemons.length === 0) return (
+    <div style={{ textAlign: 'center', padding: '80px 0', color: 'rgba(255,255,255,0.2)' }}>
+      <p style={{ fontSize: '40px', marginBottom: '12px' }}>🔍</p>
+      <p style={{ fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+        Aucun Pokémon trouvé
+      </p>
+    </div>
+  );
 
   return (
-    <div className="max-w-[1400px] mx-auto">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-8 justify-items-center">
-        {pokemons.map((pokemon) => (
-          <PokeCard key={`${pokemon.id}-${pokemon.name}`} pokemon={pokemon} />
-        ))}
-      </div>
+    <div style={gridStyle}>
+      {pokemons.map((pokemon) => (
+        <PokeCard key={`${pokemon.id}-${pokemon.name}`} pokemon={pokemon} />
+      ))}
     </div>
   );
 }

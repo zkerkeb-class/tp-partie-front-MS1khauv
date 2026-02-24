@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useLang } from '../../context/LangContext';
 
 export default function SearchBar({ onSearch }) {
+  const { lang } = useLang();
   const [query, setQuery] = useState('');
 
   const handleSubmit = (e) => {
@@ -14,30 +16,74 @@ export default function SearchBar({ onSearch }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto mb-6">
-      <div className="relative">
+    <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+      <div style={{ position: 'relative' }}>
+        {/* Icône loupe — petite */}
+        <svg
+          style={{
+            position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)',
+            width: '13px', height: '13px', color: 'rgba(255,255,255,0.25)',
+            pointerEvents: 'none', flexShrink: 0,
+          }}
+          fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+
         <input
           type="text"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Rechercher un Pokémon par nom ou numéro..."
-          className="w-full px-6 py-4 rounded-full border-2 border-gray-300 focus:border-red-500 focus:outline-none text-lg shadow-lg pr-32"
+          onChange={(e) => { setQuery(e.target.value); onSearch(e.target.value); }}
+          placeholder={lang === 'fr' ? 'Rechercher un Pokémon...' : 'Search a Pokémon...'}
+          style={{
+            width: '100%',
+            padding: '11px 110px 11px 36px',
+            background: 'rgba(255,255,255,0.04)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: '12px',
+            color: 'white',
+            fontSize: '13px',
+            fontWeight: 500,
+            outline: 'none',
+            transition: 'border-color 0.2s, background 0.2s',
+          }}
+          onFocus={e => {
+            e.target.style.borderColor = 'rgba(239,68,68,0.45)';
+            e.target.style.background = 'rgba(255,255,255,0.06)';
+          }}
+          onBlur={e => {
+            e.target.style.borderColor = 'rgba(255,255,255,0.08)';
+            e.target.style.background = 'rgba(255,255,255,0.04)';
+          }}
         />
-        <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-2">
+
+        <div style={{
+          position: 'absolute', right: '8px', top: '50%', transform: 'translateY(-50%)',
+          display: 'flex', gap: '6px', alignItems: 'center',
+        }}>
           {query && (
             <button
               type="button"
               onClick={handleClear}
-              className="bg-gray-400 text-white px-4 py-2 rounded-full hover:bg-gray-500 transition-colors font-semibold"
+              style={{
+                background: 'rgba(255,255,255,0.07)', border: 'none', color: 'rgba(255,255,255,0.5)',
+                borderRadius: '8px', padding: '4px 8px', cursor: 'pointer',
+                fontSize: '10px', fontWeight: 900, lineHeight: 1,
+              }}
             >
               ✕
             </button>
           )}
           <button
             type="submit"
-            className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors font-semibold"
+            style={{
+              background: '#dc2626', border: 'none', color: 'white',
+              borderRadius: '8px', padding: '5px 12px', cursor: 'pointer',
+              fontSize: '10px', fontWeight: 900, textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+            }}
           >
-            🔍
+            Go
           </button>
         </div>
       </div>

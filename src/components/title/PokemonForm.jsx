@@ -72,92 +72,81 @@ export default function PokemonForm({ initialData, onSubmit, onCancel, mode }) {
     onSubmit(pokemonData);
   };
 
+  const inputClass = "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-red-500/60 focus:bg-white/8 transition text-sm font-medium";
+  const labelClass = "block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2";
+
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-6 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">
-        {mode === 'create' ? '➕ Créer un nouveau Pokémon' : '✏️ Modifier le Pokémon'}
+    <form onSubmit={handleSubmit} className="bg-[#111114] border border-white/5 rounded-[2rem] p-8 max-w-4xl mx-auto">
+      <h2 className="text-3xl font-black uppercase italic tracking-tighter text-white mb-8">
+        {mode === 'create' ? '✦ Créer un Pokémon' : '✦ Modifier le Pokémon'}
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Nom */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Nom du Pokémon *
-          </label>
+          <label className={labelClass}>Nom du Pokémon *</label>
           <input
             type="text"
             value={formData.name}
             onChange={(e) => handleChange('name', e.target.value)}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            className={inputClass}
             placeholder="Pikachu"
           />
         </div>
 
-        {/* URL de l'image */}
+        {/* URL image */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            URL de l'image *
-          </label>
+          <label className={labelClass}>URL de l'image *</label>
           <input
             type="url"
             value={formData.imageUrl}
             onChange={(e) => handleChange('imageUrl', e.target.value)}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            className={inputClass}
             placeholder="https://..."
           />
         </div>
 
         {/* Taille */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Taille (décimètres) *
-          </label>
+          <label className={labelClass}>Taille (décimètres) *</label>
           <input
             type="number"
             value={formData.height}
             onChange={(e) => handleChange('height', e.target.value)}
             required
             min="1"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            className={inputClass}
           />
-          <p className="text-xs text-gray-500 mt-1">
-            {(formData.height / 10).toFixed(1)} mètre(s)
-          </p>
+          <p className="text-xs text-gray-600 mt-1.5 font-bold">{(formData.height / 10).toFixed(1)} m</p>
         </div>
 
         {/* Poids */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Poids (hectogrammes) *
-          </label>
+          <label className={labelClass}>Poids (hectogrammes) *</label>
           <input
             type="number"
             value={formData.weight}
             onChange={(e) => handleChange('weight', e.target.value)}
             required
             min="1"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            className={inputClass}
           />
-          <p className="text-xs text-gray-500 mt-1">
-            {(formData.weight / 10).toFixed(1)} kilogramme(s)
-          </p>
+          <p className="text-xs text-gray-600 mt-1.5 font-bold">{(formData.weight / 10).toFixed(1)} kg</p>
         </div>
 
         {/* Type 1 */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Type principal *
-          </label>
+          <label className={labelClass}>Type principal *</label>
           <select
             value={formData.type1}
             onChange={(e) => handleChange('type1', e.target.value)}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            className={inputClass + ' cursor-pointer'}
           >
             {pokemonTypes.map((type) => (
-              <option key={type} value={type}>
+              <option key={type} value={type} className="bg-[#111114]">
                 {capitalizeFirstLetter(type)}
               </option>
             ))}
@@ -166,17 +155,15 @@ export default function PokemonForm({ initialData, onSubmit, onCancel, mode }) {
 
         {/* Type 2 */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Type secondaire (optionnel)
-          </label>
+          <label className={labelClass}>Type secondaire (optionnel)</label>
           <select
             value={formData.type2}
             onChange={(e) => handleChange('type2', e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            className={inputClass + ' cursor-pointer'}
           >
-            <option value="">Aucun</option>
+            <option value="" className="bg-[#111114]">Aucun</option>
             {pokemonTypes.map((type) => (
-              <option key={type} value={type} disabled={type === formData.type1}>
+              <option key={type} value={type} disabled={type === formData.type1} className="bg-[#111114]">
                 {capitalizeFirstLetter(type)}
               </option>
             ))}
@@ -185,9 +172,9 @@ export default function PokemonForm({ initialData, onSubmit, onCancel, mode }) {
       </div>
 
       {/* Statistiques */}
-      <div className="mt-6">
-        <h3 className="text-xl font-bold mb-4 text-gray-800">📊 Statistiques</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="mt-8">
+        <h3 className="text-xs font-black text-red-500 uppercase tracking-widest mb-5">Statistiques</h3>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
           {[
             { key: 'hp', label: 'PV' },
             { key: 'attack', label: 'Attaque' },
@@ -197,20 +184,18 @@ export default function PokemonForm({ initialData, onSubmit, onCancel, mode }) {
             { key: 'speed', label: 'Vitesse' },
           ].map((stat) => (
             <div key={stat.key}>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {stat.label}
-              </label>
+              <div className="flex justify-between mb-2">
+                <label className={labelClass + ' mb-0'}>{stat.label}</label>
+                <span className="text-sm font-black text-red-500">{formData[stat.key]}</span>
+              </div>
               <input
                 type="range"
                 min="1"
                 max="255"
                 value={formData[stat.key]}
                 onChange={(e) => handleChange(stat.key, e.target.value)}
-                className="w-full"
+                className="w-full accent-red-500"
               />
-              <p className="text-center font-bold text-red-600 mt-1">
-                {formData[stat.key]}
-              </p>
             </div>
           ))}
         </div>
@@ -218,33 +203,33 @@ export default function PokemonForm({ initialData, onSubmit, onCancel, mode }) {
 
       {/* Prévisualisation */}
       {formData.imageUrl && (
-        <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-          <h3 className="text-lg font-bold mb-2 text-gray-800">👁️ Prévisualisation</h3>
+        <div className="mt-8 p-6 bg-white/3 border border-white/5 rounded-[1.5rem] flex flex-col items-center">
+          <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4">Prévisualisation</h3>
           <img
             src={formData.imageUrl}
             alt="Prévisualisation"
-            className="w-48 h-48 object-contain mx-auto"
+            className="w-40 h-40 object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]"
             onError={(e) => {
-              e.target.src = 'https://via.placeholder.com/200?text=Image+invalide';
+              e.target.src = 'https://placehold.co/200x200/111114/666?text=?';
             }}
           />
         </div>
       )}
 
       {/* Boutons */}
-      <div className="flex justify-end space-x-3 mt-6">
+      <div className="flex justify-end gap-3 mt-8">
         <button
           type="button"
           onClick={onCancel}
-          className="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors font-semibold"
+          className="px-6 py-3 bg-white/5 border border-white/10 text-white rounded-xl hover:bg-white/10 transition font-black uppercase tracking-widest text-xs"
         >
           Annuler
         </button>
         <button
           type="submit"
-          className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold"
+          className="px-6 py-3 bg-red-600 text-white rounded-xl hover:bg-red-700 transition font-black uppercase tracking-widest text-xs"
         >
-          {mode === 'create' ? '✨ Créer' : '💾 Sauvegarder'}
+          {mode === 'create' ? '✦ Créer' : '💾 Sauvegarder'}
         </button>
       </div>
     </form>
