@@ -1,0 +1,169 @@
+{
+    "info": {
+      "name": "Pokédex API",
+      "_postman_id": "12345678-1234-1234-1234-123456789abc",
+      "description": "Collection pour tester l'API PokéAPI utilisée dans le projet Pokédex",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Pokemon",
+        "item": [
+          {
+            "name": "Get Pokemon List",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20",
+                "protocol": "https",
+                "host": ["pokeapi", "co"],
+                "path": ["api", "v2", "pokemon"],
+                "query": [
+                  {
+                    "key": "offset",
+                    "value": "0",
+                    "description": "Décalage pour la pagination"
+                  },
+                  {
+                    "key": "limit",
+                    "value": "20",
+                    "description": "Nombre de résultats"
+                  }
+                ]
+              },
+              "description": "Récupère une liste paginée de Pokémon"
+            },
+            "response": []
+          },
+          {
+            "name": "Get Pokemon by Name",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://pokeapi.co/api/v2/pokemon/pikachu",
+                "protocol": "https",
+                "host": ["pokeapi", "co"],
+                "path": ["api", "v2", "pokemon", "pikachu"]
+              },
+              "description": "Récupère un Pokémon par son nom"
+            },
+            "response": []
+          },
+          {
+            "name": "Get Pokemon by ID",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://pokeapi.co/api/v2/pokemon/25",
+                "protocol": "https",
+                "host": ["pokeapi", "co"],
+                "path": ["api", "v2", "pokemon", "25"]
+              },
+              "description": "Récupère un Pokémon par son ID"
+            },
+            "response": []
+          },
+          {
+            "name": "Get Pokemon by Type",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://pokeapi.co/api/v2/type/electric",
+                "protocol": "https",
+                "host": ["pokeapi", "co"],
+                "path": ["api", "v2", "type", "electric"]
+              },
+              "description": "Récupère tous les Pokémon d'un type spécifique"
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Types",
+        "item": [
+          {
+            "name": "Get All Types",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://pokeapi.co/api/v2/type",
+                "protocol": "https",
+                "host": ["pokeapi", "co"],
+                "path": ["api", "v2", "type"]
+              },
+              "description": "Récupère la liste de tous les types de Pokémon"
+            },
+            "response": []
+          },
+          {
+            "name": "Get Type Details",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://pokeapi.co/api/v2/type/fire",
+                "protocol": "https",
+                "host": ["pokeapi", "co"],
+                "path": ["api", "v2", "type", "fire"]
+              },
+              "description": "Récupère les détails d'un type spécifique"
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Abilities",
+        "item": [
+          {
+            "name": "Get Ability",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://pokeapi.co/api/v2/ability/static",
+                "protocol": "https",
+                "host": ["pokeapi", "co"],
+                "path": ["api", "v2", "ability", "static"]
+              },
+              "description": "Récupère les informations sur une capacité"
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Species",
+        "item": [
+          {
+            "name": "Get Pokemon Species",
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "https://pokeapi.co/api/v2/pokemon-species/25",
+                "protocol": "https",
+                "host": ["pokeapi", "co"],
+                "path": ["api", "v2", "pokemon-species", "25"]
+              },
+              "description": "Récupère les informations d'espèce d'un Pokémon"
+            },
+            "response": []
+          }
+        ]
+      }
+    ],
+    "variable": [
+      {
+        "key": "base_url",
+        "value": "https://pokeapi.co/api/v2",
+        "type": "string"
+      }
+    ]
+  }

@@ -1,4 +1,4 @@
-import './index.css';
+/*import './index.css';
 
 const Title = ({label = 'Met un titre'}) => {
     console.log(label)
@@ -11,4 +11,4 @@ const Title = ({label = 'Met un titre'}) => {
 }
 
 
-export default Title; 
+export default Title; */

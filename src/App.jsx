@@ -1,21 +1,35 @@
-import './App.css'
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
+import { LangProvider } from './context/LangContext';
+import Layout from './components/title/Layout';
+import Home from './pages/Home';
+import DetailPage from './pages/DetailPage';
+import CreatePokemon from './pages/CreatePokemon';
+import Favorites from './pages/Favorites';
+import Battle from './pages/Battle';
+import DailyChallenge from './pages/DailyChallenge';
+import IntroScreen from './pages/IntroScreen';
+import './App.css';
 
-import Title from './components/title'
-import Counter from './components/counter'
-import PokeList from './components/pokelist'
 function App() {
-
   return (
-    <div>
-      {/* <Title  label="Titre 1" />
-      <Title label="Titre 2" />
-      <Title label="Titre 3" />
-      <Title label="Titre 4" />
-      <Title/> */}
-      <Counter/>
-      <PokeList/>
-    </div>
-  )
+    <ThemeProvider>
+      <LangProvider>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/pokemon/:id" element={<DetailPage />} />
+            <Route path="/create" element={<CreatePokemon />} />
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/battle" element={<Battle />} />
+            <Route path="/daily" element={<DailyChallenge />} />
+            <Route path="/intro" element={<IntroScreen />} />
+          </Routes>
+        </Layout>
+      </LangProvider>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
