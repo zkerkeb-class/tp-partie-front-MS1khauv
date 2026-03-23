@@ -3,6 +3,7 @@
 Application web immersive style **Cartes à Collectionner Pokémon**, construite avec **React 18 + Vite + TypeScript**.
 Couvre les **151 Pokémon de la Génération I** avec une expérience visuelle soignée, des Easter Eggs et un mode bilingue FR/EN.
 
+Lien youtube: https://youtu.be/j22T4kngBS0
 ---
 
 ## 📋 Prérequis
